@@ -60,7 +60,8 @@ DOWNLOAD_DELAY = 3
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
 #}
 DOWNLOADER_MIDDLEWARES = {
-    'doubanbook.middlewares.RandomHttpProxyMiddleware': 745,
+    'doubanbook.middlewares.ProxyMiddleware': 543,
+    #'doubanbook.middlewares.RandomHttpProxyMiddleware': 543,
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
 }
 HTTPPROXY_PROXY_LIST_FILE='E:\pythonproject\ishareread-scrapy\doubanbook\doubanbook\proxy_list.json'
@@ -79,6 +80,8 @@ ITEM_PIPELINES = {
     'doubanbook.pipelines.DoubanbookPipeline': 300,
     'doubanbook.pipelines.MySQLPipeline': 350,
 }
+
+PROXIES = ['http://61.176.223.7:58822','http://116.209.58.157:9999', 'http://116.209.55.69:9999']
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
