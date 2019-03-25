@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi"
-url = "https://pypi.org/simple"
+url = "https://pypi.org/simple/"
 verify_ssl = true
 
 [dev-packages]
@@ -9,9 +9,11 @@ verify_ssl = true
 wheel = "*"
 scrapy = "*"
 twisted = "*"
-win32api = "*"
 pywin32 = "*"
 mysqlclient = "*"
+pymongo = "*"
+requests = "*"
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.7"
