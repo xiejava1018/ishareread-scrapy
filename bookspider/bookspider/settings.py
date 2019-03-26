@@ -14,6 +14,8 @@ BOT_NAME = 'bookspider'
 SPIDER_MODULES = ['bookspider.spiders']
 NEWSPIDER_MODULE = 'bookspider.spiders'
 
+# 修改编码为utf-8
+FEED_EXPORT_ENCODING = 'utf-8'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bookspider (+http://www.yourdomain.com)'
