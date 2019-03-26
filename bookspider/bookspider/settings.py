@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for proxyspider project
+# Scrapy settings for bookspider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,19 +9,17 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'proxyspider'
+BOT_NAME = 'bookspider'
 
-SPIDER_MODULES = ['proxyspider.spiders']
-NEWSPIDER_MODULE = 'proxyspider.spiders'
+SPIDER_MODULES = ['bookspider.spiders']
+NEWSPIDER_MODULE = 'bookspider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'proxyspider (+http://www.yourdomain.com)'
+#USER_AGENT = 'bookspider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
-
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -49,13 +47,13 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'proxyspider.middlewares.ProxyspiderSpiderMiddleware': 543,
+#    'bookspider.middlewares.BookspiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'proxyspider.middlewares.ProxyspiderDownloaderMiddleware': 543,
+#    'bookspider.middlewares.BookspiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -66,9 +64,9 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'proxyspider.pipelines.RedisPipeline': 300,
-}
+#ITEM_PIPELINES = {
+#    'bookspider.pipelines.BookspiderPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -43,6 +43,7 @@ class DoubanBookSpider(scrapy.Spider):
         book['bookpress'] = response.css('div#info').xpath('./span[contains(text(),"出版社")]/following-sibling::text()').extract_first()
         book['bookpressdate'] = response.css('div#info').xpath('./span[contains(text(),"出版年")]/following-sibling::text()').extract_first()
         book['bookpage'] = response.css('div#info').xpath('./span[contains(text(),"页数")]/following-sibling::text()').extract_first()
+        book['bookprice'] = response.css('div#info').xpath('./span[contains(text(),"定价")]/following-sibling::text()').extract_first()
         book['bookisbn'] = response.css('div#info').xpath('./span[contains(text(),"ISBN")]/following-sibling::text()').extract_first()
         bookcontent_extract_info=response.css('div.related_info h2').xpath('./span[contains(text(),"内容简介")]/../following-sibling::div').css('.all .intro').extract()
         if bookcontent_extract_info:

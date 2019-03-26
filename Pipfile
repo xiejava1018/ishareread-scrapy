@@ -14,6 +14,7 @@ mysqlclient = "*"
 pymongo = "*"
 requests = "*"
 beautifulsoup4 = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"

@@ -6,67 +6,9 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
-from scrapy.exceptions import NotConfigured
-from collections import defaultdict
-import json
-import random
-import redis
-
-class RandomHttpProxyMiddleware(HttpProxyMiddleware):
-
-    def __init__(self,auth_encoding='latin-1', proxy_list_file=None):
-        if not proxy_list_file:
-            raise NotConfigured
-        self.auth_encoding=auth_encoding
-        self.proxies=defaultdict(list)
-
-        with open(proxy_list_file) as f:
-            proxy_list=json.load(f)
-            for proxy in proxy_list:
-                scheme=proxy['proxy_scheme']
-                url=proxy['proxy']
-            self.proxies[scheme].append(self._get_proxy(url, scheme))
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        auth_encoding = crawler.settings.get('HTTPPROXY_AUTH_ENCODING', 'latain-1')
-        # 从配置文件中读取代理服务器列表文件（json）的路径
-        proxy_list_file = crawler.settings.get('HTTPPROXY_PROXY_LIST_FILE')
-        return cls(auth_encoding,proxy_list_file)
-
-    def _set_proxy(self, request, scheme):
-        #随机选择一个代理
-        creds,proxy=random.choice(self.proxies[scheme])
-        print(creds,proxy)
-        request.meta['proxy']=proxy
-        if creds:
-            request.headers['Proxy-Authorization'] = b'Basic ' + creds
-
-class ProxyMiddleware(object):
-    '''
-    设置Proxy
-    '''
-    def __init__(self, ip):
-        self.ip = ip
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        db_host = crawler.settings.get('REDIS_HOST', '127.0.0.1')
-        db_port = crawler.settings.get('REDIS_PORT', 6379)
-        db_password = crawler.settings.get('REDIS_DB_PASSWORD', '123456')
-        db_index = crawler.settings.get('REDIS_DB_INDEX', 0)
-        db_conn = redis.StrictRedis(host=db_host, port=db_port, db=db_index, password=db_password,decode_responses=True)
-        proxys=db_conn.keys()
-        return cls(ip=proxys)
-
-    def process_request(self, request, spider):
-        proxyip = random.choice(self.ip)
-        print(proxyip)
-        request.meta['proxy'] = proxyip
 
 
-class DoubanbookSpiderMiddleware(object):
+class BookspiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -114,7 +56,7 @@ class DoubanbookSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class DoubanbookDownloaderMiddleware(object):
+class BookspiderDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
