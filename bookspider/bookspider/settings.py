@@ -25,6 +25,10 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 ROBOTSTXT_OBEY = True
 
 DOWNLOAD_DELAY = 0.5
+
+HTTPERROR_ALLOWED_CODES = [301]
+
+MEDIA_ALLOW_REDIRECTS =True
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -69,10 +73,11 @@ DOWNLOAD_DELAY = 0.5
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    #'scrapy.pipelines.files.FilesPipeline': 1,
     'bookspider.pipelines.DownLoadBookFilesPipeline': 1,
-    'bookspider.pipelines.MySQLPipeline': 300,
+    'bookspider.pipelines.MySQLPipeline': 350,
 }
-FILES_STORE = 'E:\\book\\'
+FILES_STORE = 'J:\\book\\'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

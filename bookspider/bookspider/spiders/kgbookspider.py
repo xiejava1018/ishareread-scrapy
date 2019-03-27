@@ -15,6 +15,7 @@ class KgBookSpider(scrapy.Spider):
     allowed_domains=["www.kgbook.com","kgbook.com"]
     start_urls=['https://www.kgbook.com']
     booktypes=['mobi','epub','azw3','pdf']
+    downloadtypes=['mobi','epub','azw3']
     booksource='kgbook'
 
     #书籍标签页的解析函数
@@ -64,12 +65,16 @@ class KgBookSpider(scrapy.Spider):
             book['bookauthor'] = bookauthor
             book['bookurl'] = bookurl
             book['booksource']=self.booksource
+            book['booksavepath'] =''
+            book['file_urls']=[]
             if '下载' in bookrestypestr:
                 bookrestype=book_restype
             if bookrestype in self.booktypes:
                 bookresurl=sel.xpath('./@href').extract_first()
                 book['bookdownloadurl']= bookresurl
                 book['booktype']=bookrestype
+                if bookrestype in self.downloadtypes:
+                    book['file_urls'].append(bookresurl)
                 yield book
 
 
