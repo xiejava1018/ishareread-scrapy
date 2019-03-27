@@ -17,4 +17,7 @@ class BookItem(scrapy.Item):
     bookurl = scrapy.Field()
     bookdownloadurl = scrapy.Field()
     booktype = scrapy.Field()
+    booksource=scrapy.Field()
     bookstatusdesc=scrapy.Field()
+    file_urls=scrapy.Field()
+
