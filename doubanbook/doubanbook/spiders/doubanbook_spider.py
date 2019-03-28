@@ -39,21 +39,21 @@ class DoubanBookSpider(scrapy.Spider):
         book['bookdoubanurl'] = bookdoubanurl
         book['bookname']=response.css('div#wrapper h1 span::text').extract_first()
         book['bookimageurl'] = response.css('div#mainpic a::attr(href)').extract_first()
-        book['bookauthor'] = response.css('div#info').xpath('./span[contains(text(),"作者")]/following-sibling::a/text()').extract_first()
-        book['bookpress'] = response.css('div#info').xpath('./span[contains(text(),"出版社")]/following-sibling::text()').extract_first()
-        book['bookpressdate'] = response.css('div#info').xpath('./span[contains(text(),"出版年")]/following-sibling::text()').extract_first()
-        book['bookpage'] = response.css('div#info').xpath('./span[contains(text(),"页数")]/following-sibling::text()').extract_first()
-        book['bookprice'] = response.css('div#info').xpath('./span[contains(text(),"定价")]/following-sibling::text()').extract_first()
-        book['bookisbn'] = response.css('div#info').xpath('./span[contains(text(),"ISBN")]/following-sibling::text()').extract_first()
-        bookcontent_extract_info=response.css('div.related_info h2').xpath('./span[contains(text(),"内容简介")]/../following-sibling::div').css('.all .intro').extract()
+        book['bookauthor'] = response.css('div#info').xpath('.//span[contains(text(),"作者")]/following-sibling::a/text()').extract_first()
+        book['bookpress'] = response.css('div#info').xpath('.//span[contains(text(),"出版社")]/following-sibling::text()').extract_first()
+        book['bookpressdate'] = response.css('div#info').xpath('.//span[contains(text(),"出版年")]/following-sibling::text()').extract_first()
+        book['bookpage'] = response.css('div#info').xpath('.//span[contains(text(),"页数")]/following-sibling::text()').extract_first()
+        book['bookprice'] = response.css('div#info').xpath('.//span[contains(text(),"定价")]/following-sibling::text()').extract_first()
+        book['bookisbn'] = response.css('div#info').xpath('.//span[contains(text(),"ISBN")]/following-sibling::text()').extract_first()
+        bookcontent_extract_info=response.css('div.related_info h2').xpath('.//span[contains(text(),"内容简介")]/../following-sibling::div').css('.all .intro').extract()
         if bookcontent_extract_info:
             book['bookcontent']=bookcontent_extract_info
         else:
-            book['bookcontent']=response.css('div.related_info h2').xpath('./span[contains(text(),"内容简介")]/../following-sibling::div').css('.intro').xpath('./*').extract()
-        bookauthordesc_extact_info=response.css('div.related_info h2').xpath('./span[contains(text(),"作者简介")]/../following-sibling::div').css('.all .intro').extract()
+            book['bookcontent']=response.css('div.related_info h2').xpath('.//span[contains(text(),"内容简介")]/../following-sibling::div').css('.intro').xpath('./*').extract()
+        bookauthordesc_extact_info=response.css('div.related_info h2').xpath('.//span[contains(text(),"作者简介")]/../following-sibling::div').css('.all .intro').extract()
         if bookauthordesc_extact_info:
             book['bookauthordesc']=bookauthordesc_extact_info
         else:
-            book['bookauthordesc'] = response.css('div.related_info h2').xpath('./span[contains(text(),"作者简介")]/../following-sibling::div').css('.intro').xpath('./*').extract()
-        book['bookcatalog'] = response.css('div.related_info h2').xpath('./span[contains(text(),"目录")]/../following-sibling::div[contains(@id,"full")]/text()').extract()
+            book['bookauthordesc'] = response.css('div.related_info h2').xpath('.//span[contains(text(),"作者简介")]/../following-sibling::div').css('.intro').xpath('./*').extract()
+        book['bookcatalog'] = response.css('div.related_info h2').xpath('.//span[contains(text(),"目录")]/../following-sibling::div[contains(@id,"full")]/text()').extract()
         yield book

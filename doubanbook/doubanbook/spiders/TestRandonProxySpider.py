@@ -15,7 +15,7 @@ class TestRandonProxySpider(scrapy.Spider):
     def start_requests(self):
         for i in range(100):
             yield Request('http://httpbin.org/ip', dont_filter=True)
-            yield Request('http://httpbin.org/ip', dont_filter=True)
+            yield Request('http://www.ishareread.com/common/disclaimer', dont_filter=True)
 
     def parse(self, response):
-        print(json.loads(response.text))
+        print('###请求返回的结果###'+response.text)

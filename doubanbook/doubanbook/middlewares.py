@@ -12,6 +12,48 @@ from collections import defaultdict
 import json
 import random
 import redis
+import logging
+import time
+from scrapy import signals
+from fake_useragent import UserAgent
+
+#随机访问时间间隔
+class RandomDelayMiddleware(object):
+    def __init__(self, crawler):
+        super(RandomDelayMiddleware,self).__init__()
+        self.delay = crawler.settings.get("RANDOM_DELAY", 10)
+
+    def __init__(self, delay):
+        self.delay = delay
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        delay = crawler.settings.get("RANDOM_DELAY", 10)
+        if not isinstance(delay, int):
+            raise ValueError("RANDOM_DELAY need a int")
+        return cls(delay)
+
+    def process_request(self, request, spider):
+        delay = random.randint(0, self.delay)
+        logging.debug("### random delay: %s s ###" % delay)
+        time.sleep(delay)
+
+#随机请求头
+class RandomUserAgentMiddleware(object):
+    def __init__(self,crawler):
+        super(RandomUserAgentMiddleware, self).__init__()
+        self.ua = UserAgent()
+        # 从配置文件settings中读取RANDOM_UA_TYPE值，默认为random，可以在settings中自定义
+        self.ua_type = crawler.settings.get("RANDOM_UA_TYPE", "random")
+    @classmethod
+    def from_crawler(cls,crawler):
+        return cls(crawler)
+
+    def process_request(self,request,spider):
+        def get_ua():
+            return getattr(self.ua,self.ua_type)
+        request.headers.setdefault('User-Agent',get_ua())
+
 
 class RandomHttpProxyMiddleware(HttpProxyMiddleware):
 
@@ -62,7 +104,7 @@ class ProxyMiddleware(object):
 
     def process_request(self, request, spider):
         proxyip = random.choice(self.ip)
-        print(proxyip)
+        print('####用到的代理IP###--'+proxyip)
         request.meta['proxy'] = proxyip
 
 

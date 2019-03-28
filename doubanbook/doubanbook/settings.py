@@ -31,7 +31,11 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 0.5
+
+RANDOM_DELAY=5
+
+RANDOM_UA_TYPE='random'
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -60,9 +64,12 @@ DOWNLOAD_DELAY = 3
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
 #}
 DOWNLOADER_MIDDLEWARES = {
-    #'doubanbook.middlewares.ProxyMiddleware': 543,
-    'doubanbook.middlewares.RandomHttpProxyMiddleware': 543,
+    'doubanbook.middlewares.ProxyMiddleware': 543,
+    #'doubanbook.middlewares.RandomHttpProxyMiddleware': 543,
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
+    'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+    'doubanbook.middlewares.RandomUserAgentMiddleware': 400,
+    'doubanbook.middlewares.RandomDelayMiddleware': 999,
 }
 HTTPPROXY_PROXY_LIST_FILE='E:\pythonproject\ishareread-scrapy\doubanbook\doubanbook\proxy_list.json'
 # Enable or disable extensions
@@ -105,7 +112,7 @@ PROXIES = ['http://61.176.223.7:58822','http://116.209.58.157:9999', 'http://116
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 #mysql数据库配置
-MYSQL_HOST = 'localhost'
+MYSQL_HOST = '127.0.0.1'
 MYSQL_DB_NAME = 'isharedb'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'mnbvvbnm'
