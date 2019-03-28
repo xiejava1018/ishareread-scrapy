@@ -60,8 +60,8 @@ DOWNLOAD_DELAY = 3
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
 #}
 DOWNLOADER_MIDDLEWARES = {
-    'doubanbook.middlewares.ProxyMiddleware': 543,
-    #'doubanbook.middlewares.RandomHttpProxyMiddleware': 543,
+    #'doubanbook.middlewares.ProxyMiddleware': 543,
+    'doubanbook.middlewares.RandomHttpProxyMiddleware': 543,
 #    'doubanbook.middlewares.DoubanbookDownloaderMiddleware': 543,
 }
 HTTPPROXY_PROXY_LIST_FILE='E:\pythonproject\ishareread-scrapy\doubanbook\doubanbook\proxy_list.json'

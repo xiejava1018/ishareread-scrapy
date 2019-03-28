@@ -26,6 +26,8 @@ ROBOTSTXT_OBEY = True
 
 DOWNLOAD_DELAY = 0.5
 
+RANDOM_DELAY=5
+
 HTTPERROR_ALLOWED_CODES = [301]
 
 MEDIA_ALLOW_REDIRECTS =True
@@ -60,9 +62,9 @@ MEDIA_ALLOW_REDIRECTS =True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'bookspider.middlewares.BookspiderDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'bookspider.middlewares.RandomDelayMiddleware': 999,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -77,7 +79,7 @@ ITEM_PIPELINES = {
     'bookspider.pipelines.DownLoadBookFilesPipeline': 1,
     'bookspider.pipelines.MySQLPipeline': 350,
 }
-FILES_STORE = 'J:\\book\\'
+FILES_STORE = 'E:\\book\\'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

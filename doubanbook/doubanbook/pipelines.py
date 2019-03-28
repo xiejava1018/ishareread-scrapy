@@ -46,16 +46,27 @@ class MySQLPipeline(object):
         port = spider.settings.get('MYSQL_PORT', 3306)
         user = spider.settings.get('MYSQL_USER', 'root')
         passwd = spider.settings.get('MYSQL_PASSWORD', 'mnbvvbnm')
-        self.dbpool = adbapi.ConnectionPool('MySQLdb', host=host, db=db,user=user, passwd=passwd, charset='utf8')
-        #self.db_conn = MySQLdb.connect(host=host, port=port, db=db,user=user, passwd=passwd, charset='utf8')
-        #self.db_cur = self.dbpool.cursor()
+        self.dbpool = adbapi.ConnectionPool('MySQLdb', host=host, port=port,db=db,user=user, passwd=passwd, charset='utf8')
 
     def close_spider(self,spider):
         self.dbpool.close()
 
     def process_item(self,item,spider):
-        self.dbpool.runInteraction(self.insert_db, item)
+        self.dbpool.runInteraction(self.checkexistbook, item)
         return item
+
+    #判断是否有重复的记录
+    def checkexistbook(self,tx,item):
+        #判断书籍ID是否重复
+        selectparam=(item['bookdoubanid'],)
+        selectbooksql='select book_douban_id from ishare_book where book_douban_id=%s'
+        tx.execute(selectbooksql, selectparam)
+        result = tx.fetchall()
+        if result:
+            print('已经存在记录：' + str(result))
+        else:
+            self.dbpool.runInteraction(self.insert_db, item)
+
 
     def insert_db(self,tx,item):
         bookvalues=(
@@ -73,20 +84,8 @@ class MySQLPipeline(object):
             item['bookdoubanid'],
             item['bookdoubanurl'],
         )
-        if self.checknoexistbook(tx,item):
-            insertbooksql='insert into ishare_book (book_name,book_author,book_press,book_pressdate,book_isbn,book_content_desc,book_author_desc,book_catalog,book_image,book_price,book_pages,book_douban_id,book_douban_url) ' \
-                'values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-            tx.execute(insertbooksql,bookvalues)
+        insertbooksql='insert into ishare_book (book_name,book_author,book_press,book_pressdate,book_isbn,book_content_desc,book_author_desc,book_catalog,book_image,book_price,book_pages,book_douban_id,book_douban_url) ' \
+            'values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+        tx.execute(insertbooksql,bookvalues)
 
-    #判断是否有重复的记录
-    def checknoexistbook(self,tx,item):
-        #判断书籍ID是否重复
-        selectparam=(item['bookdoubanid'])
-        selectbooksql='select book_douban_id from ishare_book where book_douban_id=%s'
-        self.db_cur=tx.execute(selectbooksql, selectparam)
-        values = self.db_cur.fetchall()
-        if len(values) > 0:
-            print("已经存在记录：" + str(values))
-            return False
-        else:
-            return True
+
