@@ -4,7 +4,6 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
 import json
 import random
 import redis
@@ -116,7 +115,7 @@ class ProcessAllExceptionMiddleware(object):
         print('not contained exception: %s'%exception)
 
 
-class ProxyspiderSpiderMiddleware(object):
+class ProxytestSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -164,7 +163,7 @@ class ProxyspiderSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class ProxyspiderDownloaderMiddleware(object):
+class ProxytestDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
