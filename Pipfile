@@ -17,6 +17,7 @@ beautifulsoup4 = "*"
 redis = "*"
 fake-useragent = "*"
 browsercookie = "*"
+scrapyrt = "*"
 
 [requires]
 python_version = "3.7"

@@ -65,7 +65,8 @@ class MySQLPipeline(object):
         if result:
             print('已经存在记录：' + str(result))
         else:
-            self.dbpool.runInteraction(self.insert_db, item)
+            self.insert_db(tx,item)
+            #self.dbpool.runInteraction(self.insert_db, item)
 
 
     def insert_db(self,tx,item):

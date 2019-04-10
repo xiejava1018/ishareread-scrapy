@@ -25,7 +25,6 @@ class TestRandonProxySpider(scrapy.Spider):
         'AUTOTHROTTLE_MAX_DELAY': 10,  # 设置最大下载延时
         'DOWNLOAD_TIMEOUT': 15,
         'CONCURRENT_REQUESTS_PER_DOMAIN': 4  # 限制对该网站的并发请求数
-
     }
 
     def start_requests(self):
