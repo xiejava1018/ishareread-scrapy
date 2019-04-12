@@ -6,11 +6,9 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 #数据整理，去掉换行及空格
-import MySQLdb
-import pymongo
-from scrapy.item import Item
+import pymysql
 from twisted.enterprise import adbapi
-
+pymysql.install_as_MySQLdb()
 #去空格回车和其他格式调整
 class DoubanbookPipeline(object):
     def process_item(self, item, spider):

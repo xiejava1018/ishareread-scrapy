@@ -1,16 +1,14 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d444ee52436cfadb87be8f16caa18d31f2d7ec00764d3e30ce00caa22c85f4c6"
+            "sha256": "cd9bbbe365febeeda4e2d1bcacad6afb399f46d00b4e0a55c40f55663a645ca3"
         },
         "pipfile-spec": 6,
-        "requires": {
-            "python_version": "3.7"
-        },
+        "requires": {},
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.org/simple/",
+                "url": "https://pypi.tuna.tsinghua.edu.cn/simple/",
                 "verify_ssl": true
             }
         ]
@@ -250,15 +248,6 @@
             ],
             "version": "==2.1.6"
         },
-        "mysqlclient": {
-            "hashes": [
-                "sha256:425e733b05e359a714d6007c0fc44582be66b63e5a3df0a50949274ae16f4bc6",
-                "sha256:62e4770b6a797b9416bcf70488365b7d6b9c9066878108499c559293bb464380",
-                "sha256:f257d250f2675d0ef99bd318906f3cfc05cef4a2f385ea695ff32a3f04b9f9a7"
-            ],
-            "index": "pypi",
-            "version": "==1.4.2.post1"
-        },
         "parsel": {
             "hashes": [
                 "sha256:493a9214acbdcb4487a084d95344c25e85e90426a67311ea0425dc5df8dc24b9",
@@ -345,6 +334,13 @@
             ],
             "index": "pypi",
             "version": "==3.7.2"
+        },
+        "pymysql3": {
+            "hashes": [
+                "sha256:a78201b28c94f45be6dffd9775d5f5f04406d7b7fd60ed0773d01493cdecea46"
+            ],
+            "index": "pypi",
+            "version": "==0.5"
         },
         "pyopenssl": {
             "hashes": [
@@ -436,10 +432,11 @@
         },
         "twisted": {
             "hashes": [
-                "sha256:294be2c6bf84ae776df2fc98e7af7d6537e1c5e60a46d33c3ce2a197677da395"
+                "sha256:1708e1928ae84ec9d3ebab0d427e20e1e38ff721b15bbced476d047d4a43abbe",
+                "sha256:3716eca1c80ef88729a85e9a70f09acce8df2adf7c58590d54c94f383945bc47"
             ],
             "index": "pypi",
-            "version": "==18.9.0"
+            "version": "==19.2.0"
         },
         "urllib3": {
             "hashes": [
